@@ -6,6 +6,8 @@ import (
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
+
+	"munendereba/rabbit-mq-service/helper"
 )
 
 func failOnError(err error, msg string) {
@@ -14,15 +16,9 @@ func failOnError(err error, msg string) {
 	}
 }
 
-func connectRabbitMQServer() *amqp.Connection {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
-	failOnError(err, "Failed to connect to RabbitMQ")
-
-	return conn
-}
-
 func main() {
-	conn := connectRabbitMQServer()
+	conn := helper.ConnectRabbitMQServer()
+
 	ch, err := conn.Channel()
 	failOnError(err, "Failed to open a channel")
 	defer ch.Close()
