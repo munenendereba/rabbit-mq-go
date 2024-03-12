@@ -10,7 +10,7 @@ import (
 	"munendereba/rabbit-mq-service/helper"
 )
 
-func main() {
+func Send() {
 	conn := helper.ConnectRabbitMQServer()
 
 	ch, err := conn.Channel()
